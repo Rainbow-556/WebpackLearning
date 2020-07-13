@@ -1,0 +1,13 @@
+安装
+	安装指定版本：cnpm install webpack@3.6.0 -g，-g表示全局安装，去掉-g表示某个项目局部安装，需要先全局安装，再局部安装
+卸载
+	npm uninstall webpack -g，-g意义同上
+
+chunk的概念：chunk是对一组有依赖关系的模块的封装）。假设我们的应用从index.js开始一层层引入了几百个模块，也许其中很多模块都引入了各自的样式，
+但是最终只会生成一个CSS文件，因为它们都来自同一个入口模块。
+
+loader：webpack默认只能处理js文件，对于css、图片、字体等文件需要使用特殊的loader进行转换成js代码给webpack。
+如style-loader把解析css-loader的转换结果(纯css字符串)用js代码包装起来，动态创建link标签插入到head标签中，经过style-loader处理之后输出的内容就是一段纯js代码。
+如果是最上层的loader(rules数组中的第0个)，该loader只能返回js代码；其他中间loader可以不返回js代码，只需返回它下游loader能处理的内容就行。
+
+plugin：插件目的在于解决loader无法实现的其他事。基于在webpack构建过程中注册各种事件钩子，在钩子函数中做想做的事情
